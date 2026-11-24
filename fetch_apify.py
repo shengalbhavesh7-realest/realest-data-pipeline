@@ -72,9 +72,12 @@ def main():
     elif args.url:
         print(f"Starting fresh scrape via {DEFAULT_ACTOR_ID} (max {args.max_items} items)...")
         run_input = {
-            "startUrls": [{"url": args.url}],
+            "startUrls": [args.url],
             "maxItems": args.max_items,
-            "includeDetailPages": False,
+            "maxItemsPerSearch": args.max_items,
+            "scrapeDetails": False,
+            "agentMode": False,
+            "transactionType": "sale",
         }
         run = client.actor(DEFAULT_ACTOR_ID).call(run_input=run_input)
         dataset_id = run.default_dataset_id
